@@ -15,12 +15,16 @@ jobs:
         dotnet-version: 8.0.x
     - name: Install MAUI Workloads
       run: dotnet workload restore
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Restore dependencies for Server
+      run: dotnet restore AccountingApp.Server/AccountingApp.Server.csproj -f net8.0
+    - name: Restore dependencies for Client
+      run: dotnet restore AccountingApp.Client/AccountingApp.Client.csproj -f net8.0-android
+    - name: Restore dependencies for Mobile
+      run: dotnet restore AccountingApp.Mobile/AccountingApp.Mobile.csproj -f net8.0-android
     - name: Build for Android and Desktop
       run: |
-        dotnet build AccountingApp.Server -f net8.0
-        dotnet build AccountingApp.Client -f net8.0-android
-        dotnet build AccountingApp.Mobile -f net8.0-android
+        dotnet build AccountingApp.Server/AccountingApp.Server.csproj -f net8.0 --no-restore
+        dotnet build AccountingApp.Client/AccountingApp.Client.csproj -f net8.0-android --no-restore
+        dotnet build AccountingApp.Mobile/AccountingApp.Mobile.csproj -f net8.0-android --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
