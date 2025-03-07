@@ -1,0 +1,10 @@
+# Visual Studio tijdelijke bestanden
+.vs/
+
+# Build-output
+bin/
+obj/
+
+# Andere tijdelijke bestanden
+*.user
+*.suo
