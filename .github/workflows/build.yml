@@ -17,7 +17,10 @@ jobs:
       run: dotnet workload restore
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build for Android and Desktop
+      run: |
+        dotnet build AccountingApp.Server -f net8.0
+        dotnet build AccountingApp.Client -f net8.0-android
+        dotnet build AccountingApp.Mobile -f net8.0-android
     - name: Test
       run: dotnet test --no-build --verbosity normal
